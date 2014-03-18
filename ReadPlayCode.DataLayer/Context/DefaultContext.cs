@@ -9,5 +9,11 @@ namespace ReadPlayCode.DataLayer.Context
 
         public IDbSet<User> Users { get; set; }
         public IDbSet<BlogPost> BlogPosts { get; set; }
+
+        public void SetModified(object entity)
+        {
+            var entry = Entry(entity);
+            entry.State = EntityState.Modified;
+        }
     }
 }

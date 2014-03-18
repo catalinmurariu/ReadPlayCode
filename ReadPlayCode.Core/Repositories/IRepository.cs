@@ -8,5 +8,6 @@ namespace ReadPlayCode.Repositories
         void InsertOrUpdate(T item);
         void Delete(T item);
         T GetById(int id);
+        void PersistAll();
     }
 }

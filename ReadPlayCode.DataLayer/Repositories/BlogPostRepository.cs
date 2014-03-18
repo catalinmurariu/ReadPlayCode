@@ -26,7 +26,16 @@ namespace ReadPlayCode.DataLayer.Repositories
 
         public void InsertOrUpdate(IBlogPost item)
         {
-            throw new System.NotImplementedException();
+            if (item.Id == 0) //insert
+            {
+                _context.BlogPosts.Add(_mapper.ModelToData(item));
+            }
+            else //update
+            {
+                var entity = _mapper.ModelToData(item);
+                _context.BlogPosts.Attach(entity);
+                _context.SetModified(entity);
+            }
         }
 
         public void Delete(IBlogPost item)
@@ -37,6 +46,11 @@ namespace ReadPlayCode.DataLayer.Repositories
         public IBlogPost GetById(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void PersistAll()
+        {
+            _context.SaveChanges();
         }
     }
 }

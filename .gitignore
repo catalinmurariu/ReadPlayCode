@@ -2,6 +2,7 @@
 bin
 obj
 /packages/*
+ReadPlayCode.v12.suo
 
 #exceptions
 !/packages/repositories.config
