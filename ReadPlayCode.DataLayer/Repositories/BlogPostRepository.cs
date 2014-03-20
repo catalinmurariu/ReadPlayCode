@@ -21,7 +21,7 @@ namespace ReadPlayCode.DataLayer.Repositories
 
         public IList<IBlogPost> All()
         {
-            return _context.BlogPosts.Local.Select(b => _mapper.DataToModel(b)).ToList();
+            return _context.BlogPosts.Local.Select(_mapper.DataToModel).ToList();
         }
 
         public void InsertOrUpdate(IBlogPost item)
@@ -40,12 +40,12 @@ namespace ReadPlayCode.DataLayer.Repositories
 
         public void Delete(IBlogPost item)
         {
-            throw new System.NotImplementedException();
+            _context.BlogPosts.Remove(_mapper.ModelToData(item));
         }
 
         public IBlogPost GetById(int id)
         {
-            throw new System.NotImplementedException();
+            return _mapper.DataToModel(_context.BlogPosts.Where(b => b.Id == id).FirstOrDefault());
         }
 
         public void PersistAll()
