@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
+using ReadPlayCode.DataLayer.Entities;
 
 namespace ReadPlayCode.DataLayer.Tests
 {
@@ -17,7 +18,7 @@ namespace ReadPlayCode.DataLayer.Tests
         [TestFixture]
         public class All_Method
         {
-            private static IBlogPost CreateMockedObject(BlogPost b)
+            private static IBlogPost CreateMockedObject(BlogPostEntity b)
             {
                 var mock = new Mock<IBlogPost>();
                 mock.Setup(m => m.Id).Returns(1);
@@ -29,14 +30,14 @@ namespace ReadPlayCode.DataLayer.Tests
             {
                 //mocks
                 var contextMock = new Mock<IContext>();
-                var blogBostsDbSetMock = new Mock<IDbSet<BlogPost>>();
+                var blogBostsDbSetMock = new Mock<IDbSet<BlogPostEntity>>();
 
-                blogBostsDbSetMock.Setup(b=>b.Local).Returns(new ObservableCollection<BlogPost>(new[]{ new BlogPost{Id = 1}, new BlogPost { Id = 2} }));
+                blogBostsDbSetMock.Setup(b=>b.Local).Returns(new ObservableCollection<BlogPostEntity>(new[]{ new BlogPostEntity{Id = 1}, new BlogPostEntity { Id = 2} }));
 
                 contextMock.Setup(m => m.BlogPosts).Returns(blogBostsDbSetMock.Object);
 
-                var mapperMock = new Mock<IMapper<BlogPost, IBlogPost>>();
-                mapperMock.Setup(m => m.DataToModel(It.IsAny<BlogPost>())).Returns(CreateMockedObject(It.IsAny<BlogPost>()));
+                var mapperMock = new Mock<IMapper<BlogPostEntity, IBlogPost>>();
+                mapperMock.Setup(m => m.DataToModel(It.IsAny<BlogPostEntity>())).Returns(CreateMockedObject(It.IsAny<BlogPostEntity>()));
 
                 //target setup
                 var target = new BlogPostRepository(contextMock.Object, mapperMock.Object);
@@ -58,7 +59,7 @@ namespace ReadPlayCode.DataLayer.Tests
                 //mock and setup
                 var contextMock = new Mock<IContext>();
                 contextMock.Setup(c => c.SaveChanges()).Verifiable();
-                var mapperMock = new Mock<IMapper<BlogPost, IBlogPost>>();
+                var mapperMock = new Mock<IMapper<BlogPostEntity, IBlogPost>>();
                 var target = new BlogPostRepository(contextMock.Object, mapperMock.Object);
 
                 //act
@@ -77,14 +78,14 @@ namespace ReadPlayCode.DataLayer.Tests
             {
                 //mock and setup
                 var contextMock = new Mock<IContext>();
-                var blogBostsDbSetMock = new Mock<IDbSet<BlogPost>>();
-                blogBostsDbSetMock.Setup(b => b.Add(It.IsAny<BlogPost>())).Verifiable();
-                blogBostsDbSetMock.Setup(b => b.Attach(It.IsAny<BlogPost>())).Verifiable();
+                var blogBostsDbSetMock = new Mock<IDbSet<BlogPostEntity>>();
+                blogBostsDbSetMock.Setup(b => b.Add(It.IsAny<BlogPostEntity>())).Verifiable();
+                blogBostsDbSetMock.Setup(b => b.Attach(It.IsAny<BlogPostEntity>())).Verifiable();
 
                 contextMock.Setup(m => m.BlogPosts).Returns(blogBostsDbSetMock.Object);
 
-                var mapperMock = new Mock<IMapper<BlogPost, IBlogPost>>();
-                mapperMock.Setup(m => m.ModelToData(It.IsAny<IBlogPost>())).Returns(new BlogPost());
+                var mapperMock = new Mock<IMapper<BlogPostEntity, IBlogPost>>();
+                mapperMock.Setup(m => m.ModelToData(It.IsAny<IBlogPost>())).Returns(new BlogPostEntity());
 
                 var target = new BlogPostRepository(contextMock.Object, mapperMock.Object);
                 var modelMock = new Mock<IBlogPost>();
@@ -94,8 +95,8 @@ namespace ReadPlayCode.DataLayer.Tests
                 target.InsertOrUpdate(modelMock.Object);
 
                 //assert
-                blogBostsDbSetMock.Verify(b => b.Add(It.IsAny<BlogPost>()));
-                blogBostsDbSetMock.Verify(b => b.Attach(It.IsAny<BlogPost>()), Times.Never);
+                blogBostsDbSetMock.Verify(b => b.Add(It.IsAny<BlogPostEntity>()));
+                blogBostsDbSetMock.Verify(b => b.Attach(It.IsAny<BlogPostEntity>()), Times.Never);
             }
 
             [Test]
@@ -103,15 +104,15 @@ namespace ReadPlayCode.DataLayer.Tests
             {
                 //mock and setup
                 var contextMock = new Mock<IContext>();
-                var blogBostsDbSetMock = new Mock<IDbSet<BlogPost>>();
-                blogBostsDbSetMock.Setup(b => b.Add(It.IsAny<BlogPost>())).Verifiable();
-                blogBostsDbSetMock.Setup(b => b.Attach(It.IsAny<BlogPost>())).Verifiable();
+                var blogBostsDbSetMock = new Mock<IDbSet<BlogPostEntity>>();
+                blogBostsDbSetMock.Setup(b => b.Add(It.IsAny<BlogPostEntity>())).Verifiable();
+                blogBostsDbSetMock.Setup(b => b.Attach(It.IsAny<BlogPostEntity>())).Verifiable();
 
                 contextMock.Setup(m => m.BlogPosts).Returns(blogBostsDbSetMock.Object);
                 contextMock.Setup(m => m.SetModified(It.IsAny<object>())).Verifiable();
 
-                var mapperMock = new Mock<IMapper<BlogPost, IBlogPost>>();
-                mapperMock.Setup(m => m.ModelToData(It.IsAny<IBlogPost>())).Returns(new BlogPost());
+                var mapperMock = new Mock<IMapper<BlogPostEntity, IBlogPost>>();
+                mapperMock.Setup(m => m.ModelToData(It.IsAny<IBlogPost>())).Returns(new BlogPostEntity());
 
                 var target = new BlogPostRepository(contextMock.Object, mapperMock.Object);
                 var modelMock = new Mock<IBlogPost>();
@@ -121,8 +122,8 @@ namespace ReadPlayCode.DataLayer.Tests
                 target.InsertOrUpdate(modelMock.Object);
 
                 //assert
-                blogBostsDbSetMock.Verify(b => b.Add(It.IsAny<BlogPost>()), Times.Never);
-                blogBostsDbSetMock.Verify(b => b.Attach(It.IsAny<BlogPost>()), Times.Once);
+                blogBostsDbSetMock.Verify(b => b.Add(It.IsAny<BlogPostEntity>()), Times.Never);
+                blogBostsDbSetMock.Verify(b => b.Attach(It.IsAny<BlogPostEntity>()), Times.Once);
                 contextMock.Verify(m => m.SetModified(It.IsAny<object>()), Times.Once);
             }
 
@@ -136,13 +137,13 @@ namespace ReadPlayCode.DataLayer.Tests
             {
                 //mock and setup
                 var contextMock = new Mock<IContext>();
-                var blogBostsDbSetMock = new Mock<IDbSet<BlogPost>>();
-                blogBostsDbSetMock.Setup(b => b.Remove(It.IsAny<BlogPost>())).Verifiable();
+                var blogBostsDbSetMock = new Mock<IDbSet<BlogPostEntity>>();
+                blogBostsDbSetMock.Setup(b => b.Remove(It.IsAny<BlogPostEntity>())).Verifiable();
 
                 contextMock.Setup(m => m.BlogPosts).Returns(blogBostsDbSetMock.Object);
 
-                var mapperMock = new Mock<IMapper<BlogPost, IBlogPost>>();
-                mapperMock.Setup(m => m.ModelToData(It.IsAny<IBlogPost>())).Returns(new BlogPost());
+                var mapperMock = new Mock<IMapper<BlogPostEntity, IBlogPost>>();
+                mapperMock.Setup(m => m.ModelToData(It.IsAny<IBlogPost>())).Returns(new BlogPostEntity());
 
                 var target = new BlogPostRepository(contextMock.Object, mapperMock.Object);
                 var modelMock = new Mock<IBlogPost>();
@@ -152,7 +153,7 @@ namespace ReadPlayCode.DataLayer.Tests
                 target.Delete(modelMock.Object);
 
                 //assert
-                blogBostsDbSetMock.Verify(b => b.Remove(It.IsAny<BlogPost>()), Times.Once);
+                blogBostsDbSetMock.Verify(b => b.Remove(It.IsAny<BlogPostEntity>()), Times.Once);
             }
         }
 

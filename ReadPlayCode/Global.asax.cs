@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReadPlayCode.Web.Mappers.Profiles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace ReadPlayCode.Web
     {
         protected void Application_Start()
         {
+            DefaultMappingProfile.Init();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -1,6 +1,6 @@
-﻿namespace ReadPlayCode.Models
+﻿namespace ReadPlayCode.DataLayer.Entities
 {
-    public class User : Entity
+    public class UserEntity : Entity
     {
         public string UserName { get; set; }
 
@@ -8,6 +8,6 @@
 
         public string Email { get; set; }
 
-        public Role UserRole { get; set; }
+        public RoleEntity UserRole { get; set; }
     }
 }

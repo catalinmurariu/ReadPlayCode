@@ -1,4 +1,5 @@
-﻿using ReadPlayCode.Models;
+﻿using ReadPlayCode.DataLayer.Entities;
+using ReadPlayCode.Models;
 using System.Data.Entity;
 
 namespace ReadPlayCode.DataLayer.Context
@@ -7,8 +8,8 @@ namespace ReadPlayCode.DataLayer.Context
     {
         public DefaultContext() : base("DefaultConnection") {}
 
-        public IDbSet<User> Users { get; set; }
-        public IDbSet<BlogPost> BlogPosts { get; set; }
+        public IDbSet<UserEntity> Users { get; set; }
+        public IDbSet<BlogPostEntity> BlogPosts { get; set; }
 
         public void SetModified(object entity)
         {

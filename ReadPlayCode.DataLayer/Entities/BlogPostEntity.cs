@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace ReadPlayCode.Models
+namespace ReadPlayCode.DataLayer.Entities
 {
-    public class BlogPost : Entity
+    public class BlogPostEntity : Entity
     {
         public string Title { get; set; }
         string Text { get; set; }
         public DateTime Updated { get; set; }
 
-        public User Author { get; set; }
+        public UserEntity Author { get; set; }
     }
 }

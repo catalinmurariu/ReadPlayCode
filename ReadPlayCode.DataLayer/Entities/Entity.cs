@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReadPlayCode.Models
+namespace ReadPlayCode.DataLayer.Entities
 {
     public class Entity
     {

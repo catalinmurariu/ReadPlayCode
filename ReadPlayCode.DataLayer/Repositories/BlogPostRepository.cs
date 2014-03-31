@@ -5,15 +5,16 @@ using ReadPlayCode.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ReadPlayCode.DataLayer.Entities;
 
 namespace ReadPlayCode.DataLayer.Repositories
 {
     public class BlogPostRepository : IRepository<IBlogPost>
     {
         private readonly IContext _context;
-        private readonly IMapper<BlogPost, IBlogPost> _mapper;
+        private readonly IMapper<BlogPostEntity, IBlogPost> _mapper;
 
-        public BlogPostRepository(IContext context, IMapper<BlogPost, IBlogPost> mapper)
+        public BlogPostRepository(IContext context, IMapper<BlogPostEntity, IBlogPost> mapper)
         {
             _context = context;
             _mapper = mapper;
