@@ -22,7 +22,8 @@ namespace ReadPlayCode.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var blogs = _repo.All().OrderByDescending(b => b.Created).Take(10);
+            return View(blogs);
         }
 
         public ActionResult About()

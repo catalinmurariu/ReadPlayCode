@@ -11,8 +11,8 @@ namespace ReadPlayCode.Web.Mappers.Profiles
         {
             Mapper.CreateMap<RoleEntity, Role>();
             Mapper.CreateMap<Role, RoleEntity>();
-            Mapper.CreateMap<UserEntity, User>();
-            Mapper.CreateMap<User, UserEntity>();
+            Mapper.CreateMap<UserEntity, ReadPlayCode.Web.Models.User>();
+            Mapper.CreateMap<ReadPlayCode.Web.Models.User, UserEntity>();
             Mapper.CreateMap<BlogPostEntity, BlogPost>();
             Mapper.CreateMap<BlogPost, BlogPostEntity>();
         }

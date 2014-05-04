@@ -22,7 +22,7 @@ namespace ReadPlayCode.DataLayer.Repositories
 
         public IList<IBlogPost> All()
         {
-            return _context.BlogPosts.Local.Select(_mapper.DataToModel).ToList();
+            return _context.BlogPosts.Select(_mapper.DataToModel).ToList();
         }
 
         public void InsertOrUpdate(IBlogPost item)

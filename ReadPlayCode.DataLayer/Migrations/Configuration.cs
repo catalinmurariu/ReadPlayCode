@@ -1,5 +1,6 @@
 namespace ReadPlayCode.Migrations
 {
+    using ReadPlayCode.DataLayer.Entities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +27,15 @@ namespace ReadPlayCode.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            var defaultUser = new UserEntity{ Created = DateTime.Now, DisplayName = "Catalin", Email = "x@x.x", UserName="catalin", UserRole= new RoleEntity{ Created = DateTime.Now, Name="Writer"}};
+
+            context.Users.AddOrUpdate(defaultUser);
+
+            context.BlogPosts.AddOrUpdate(
+                new BlogPostEntity { Title = "Test 1", Created = DateTime.Now, Text = "This is a blog entry test. Bla bla... <p>New paragraph...</p>", Author = defaultUser },
+                new BlogPostEntity { Title = "Test 2", Created = DateTime.Now, Text = "This is a second blog entry test. Bla bla... second time <p>New paragraph...</p>", Author = defaultUser }
+                );
         }
     }
 }

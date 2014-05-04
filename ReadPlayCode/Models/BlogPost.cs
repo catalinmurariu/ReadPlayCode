@@ -12,8 +12,16 @@ namespace ReadPlayCode.Web.Models
         public DateTime Created {get;set; }
         
         public DateTime Updated { get; set; }
-        
-        public IUser Author { get; set; }
+
+        private User _author;
+
+        IUser IBlogPost.Author 
+        { 
+            get { return Author; }
+            set { Author = value as User; } 
+        }
+
+        public User Author { get; set; }
         
         public int Id { get; set; }
     }

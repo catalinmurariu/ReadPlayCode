@@ -10,11 +10,12 @@ namespace ReadPlayCode.Web.Models
         
         public string Email { get; set; }
         
-        public IRole Role 
+        IRole IUser.Role 
         {
-            get { return null; }
-            set { /*do nothing*/ } 
+            get { return Role; }
         }
+
+        public Role Role { get; set; }
 
         public int Id { get; set; }
     }
