@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReadPlayCode.Models;
+using ReadPlayCode.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,16 @@ namespace ReadPlayCode.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IRepository<IBlogPost> _repo;
+
+        public HomeController(IRepository<IBlogPost> repo)
+        {
+            if (repo == null)
+                throw new ArgumentNullException("repo");
+
+            _repo = repo;
+        }
+
         public ActionResult Index()
         {
             return View();

@@ -15,6 +15,7 @@ namespace ReadPlayCode.Web
         {
             DefaultMappingProfile.Init();
             AreaRegistration.RegisterAllAreas();
+            BootStrap.Init();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
